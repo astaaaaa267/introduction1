@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kabir 💖</title>
+<title>Introduction1</title>
 
 <style>
 body {
@@ -37,7 +37,11 @@ body {
 #p10 { background: linear-gradient(#232526, #414345); }
 #p11 { background: linear-gradient(#000000, #434343); }
 #p12 { background: linear-gradient(#141e30, #243b55); }
-#p13 { background: black; }
+#p13 { background: linear-gradient(#000000, #0f2027); }
+#p14 { background: linear-gradient(#232526, #414345); }
+#p15 { background: linear-gradient(#42275a, #734b6d); }
+#p16 { background: linear-gradient(#141e30, #243b55); }
+#p17 { background: black; }
 
 img {
   width:260px;
@@ -62,8 +66,8 @@ button {
   <source src="bb.mp3">
 </audio>
 
-<audio id="meme">
-  <source src="meme.MP3">
+<audio id="meme" loop>
+  <source src="meme.mp3">
 </audio>
 
 <audio id="noSound">
@@ -85,7 +89,7 @@ button {
   <button onclick="no()">No</button>
 </div>
 
-<!-- WRONG PAGE -->
+<!-- WRONG -->
 <div class="page hidden" id="p3">
   <h1 style="color:red;">Wrong Choice 😈</h1>
 </div>
@@ -93,13 +97,13 @@ button {
 <!-- NAME -->
 <div class="page hidden" id="p4">
   <img src="photo5.jpeg">
-  <h1>name:-Kabir Kumar Bay 💖</h1>
+  <h1>Name:- Kabir Kumar Bay 💖</h1>
   <button onclick="next(4)">Next</button>
 </div>
 
 <!-- INFO -->
 <div class="page hidden" id="p5">
-  <h2>I live in Assam, Guwahati 🌍</h2>
+  <h2>I live in Guwahati, Assam 🌍</h2>
   <button onclick="next(5)">Next</button>
 </div>
 
@@ -128,6 +132,7 @@ button {
 </div>
 
 <div class="page hidden" id="p10">
+  <img src="photo2.jpeg">
   <h1>😏 Annoying others 🤧</h1>
   <button onclick="next(10)">Next</button>
 </div>
@@ -135,24 +140,58 @@ button {
 <!-- END -->
 <div class="page hidden" id="p11">
   <img src="photo6.jpeg">
-  <h1>The story doesn't end here 💖</h1>
+  <h1>The story doesn't end here… 💖</h1>
+  <p>Still more to come 😏</p>
+  <button id="runBtn" onclick="runButton()">Next</button>
+</div>
+
+<!-- FUN FACT TITLE -->
+<div class="page hidden" id="p12">
+  <h1>Fun Fact About Me 😄</h1>
+  <button onclick="next(12)">Next</button>
+</div>
+
+<!-- FACTS -->
+<div class="page hidden" id="p13">
+  <p>I open my phone for 5 minutes… and end up using it for hours 📱😂</p>
+  <button onclick="next(13)">Next</button>
+</div>
+
+<div class="page hidden" id="p14">
+  <p>I say “last game”… but it’s never the last 🎮</p>
+  <button onclick="next(14)">Next</button>
+</div>
+
+<div class="page hidden" id="p15">
+  <p>I can sleep anywhere… no conditions required 😴😂</p>
+  <button onclick="next(15)">Next</button>
+</div>
+
+<div class="page hidden" id="p16">
+  <p>I enjoy writing poems ✍️</p>
+  <button onclick="next(16)">Next</button>
+</div>
+
+<!-- FINAL -->
+<div class="page hidden" id="p17">
+  <h1>One Last Thing 💧</h1>
+  <p>Don’t forget to drink water.</p>
+
+  <h2 style="margin-top:40px; letter-spacing:3px;">— THE END — 🎬</h2>
 </div>
 
 <script>
 
-// NEXT FUNCTION
 function next(n){
   document.getElementById("p"+n).classList.add("hidden");
   document.getElementById("p"+(n+1)).classList.remove("hidden");
 }
 
-// YES → next normal flow
 function yes(){
   document.getElementById("p2").classList.add("hidden");
   document.getElementById("p4").classList.remove("hidden");
 }
 
-// NO → wrong page
 function no(){
   document.getElementById("bg").pause();
   document.getElementById("noSound").play();
@@ -160,17 +199,35 @@ function no(){
   document.getElementById("p3").classList.remove("hidden");
 }
 
-// CLICK → BG MUSIC
+// RUN BUTTON
+let runCount = 0;
+
+function runButton(){
+  let btn = document.getElementById("runBtn");
+
+  if(runCount < 2){
+    btn.style.position = "absolute";
+    btn.style.top = Math.random()*80 + "%";
+    btn.style.left = Math.random()*80 + "%";
+    runCount++;
+  } else {
+    next(11);
+  }
+}
+
+// MUSIC START
 document.body.addEventListener("click", function () {
   document.getElementById("bg").play();
 }, { once: true });
 
-// END MEME
+// MEME START
+let memeStarted=false;
 setInterval(()=>{
   let p11=document.getElementById("p11");
-  if(p11 && !p11.classList.contains("hidden")){
+  if(p11 && !p11.classList.contains("hidden") && !memeStarted){
     document.getElementById("bg").pause();
     document.getElementById("meme").play();
+    memeStarted=true;
   }
 },500);
 
